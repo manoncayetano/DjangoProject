@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+<script>$(() => {
+})</script>
+{% block title %} Produits !{% endblock %}
+{% block body_content %}
+     {% if user.is_authenticated %}
+    <div class="add">
+        <a href="/createproduct">
+            <img src="{% static '/media/plus-icone.png' %}" alt="">
+        </a>
+    </div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            {% for object in object_list %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
+                    <div class="card">
+                        <a href="{% url 'product' object.id %}">
+                            <img class="card-img-top" src="/{{ object.banner }}" alt="image de {{ object.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ object.name }}</h5>
+                                <p class="card-text">{{ object.summary }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted"> De {{ object.users }}, {{ object.date_pub }}</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+

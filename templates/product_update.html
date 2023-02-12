@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+<script>$(() => {
+})</script>
+{% block title %} Modification {% endblock %}
+{% block body_content %}
+    <h2>Modification de votre annonce {{ product.name }}</h2>
+    <div class="container">
+        <div class="row">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col-12 justify-content-center">
+                    <div class="row mb-2">
+                        <div class="col-12 col-md-6 pt-4 ">
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    Nom :
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-12 mb-2">
+                                    Résumé :
+                                    {{ form.summary }}
+                                </div>
+                                <div class="col-12 mb-2">
+                                    Description:
+                                    {{ form.content }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <label>Image Vignette</label>
+                                    {{ form.banner }}
+                                </div>
+                                <label>Image 1</label>
+                                {{ form.img1 }}
+                                <label>Image 2</label>
+                                {{ form.img2 }}
+                                <label>Image 3</label>
+                                {{ form.img3 }}
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.categories }} </div>
+                            </div>
+                        </div>
+                    </div></br>
+                    {{ form.errors}}
+                    <div class="center w-100">
+                        <button type="submit" class="btn btn-success w-75 center">Valider</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

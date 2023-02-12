@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Recipes !{% endblock %}
+{% block body_content %}
+    <div class="container mt-5">
+    <h3 class="center">Connexion</h3>
+        <form METHOD="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="row justify-content-center login">
+                <div class="col-7 mb-2">
+                    {{ form.username }}
+                </div>
+                <div class="col-7 mb-2">
+                    {{ form.password }}
+                </div>
+                <div class="col-7 mb-2">
+                    <a href="{% url 'register' %}">Lien <b>Inscription</b></a>
+                </div>
+
+                <div class="col-7">
+                    <button type="submit" value="Login" class="btn btn-success">Valider</button>
+                </div>
+            </div>
+
+            {{ form.errors }}
+        </form>
+    </div>
+{% endblock %}

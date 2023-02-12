@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title  %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+
+
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h1><a href="/">Trouve ton champs.com</a></h1>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <form id="product-search">
+                        <label for="product-name">
+                            <input type="text" id="product-name" placeholder="Recherche" class="form-control"/>
+                        </label>
+                    </form>
+                </div>
+            </div>
+            <div class="col-2 offset-1  align-self-start">
+                <img src="">
+                {% if user.is_authenticated %}
+                    <div class="user" onmouseover="mouseOver()" onmouseout="mouseOut()">
+                        <img src="{% static '/media/user.png' %}">
+                    </div>
+                    <div id="menu-user" onmouseover="mouseOver()" onmouseout="mouseOut()">
+                        <div class="annonces"><a href="{% url 'product_user'%}"><b>Mes annonces</b></a></div>
+                        <a href="{% url 'logout' %}"><b>Déconnexion</b></a>
+                    </div>
+
+                {% else %}
+                    <a href="{% url 'login' %}"><b>Connexion</b></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main content -->
+
+{% block body_content %}
+
+{% endblock %}
+
+<script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+
+<script>$(() => {
+    $("#product-search").submit(function () {
+        window.location.replace('/product/search/'+$('#product-name').val())
+        return false;
+    })
+})</script>
+
+<script>
+    function mouseOver() {
+        document.getElementById("menu-user").style.display = "block";
+    }
+
+    function mouseOut() {
+        document.getElementById("menu-user").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

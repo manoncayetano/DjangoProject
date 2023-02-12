@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+<script>$(() => {
+})</script>
+{% block title %}Mes produits{% endblock %}
+{% block body_content %}
+    <h2 class="mb-3 mt-3">Vos Annonces</h2>
+    <div class="trait"><hr></div>
+    <div class="add">
+        <a href="/createproduct">
+            <img src="{% static '/media/plus-icone.png' %}" alt="">
+        </a>
+    </div>
+    <div class="container">
+        {% for object in object_list %}
+            {% if user.id == object.users_id %}
+                <div class="row list">
+                    <div class="col-4 col-md-2 img-padding">
+                        <img class="img-radius" src="../{{ object.banner }}" alt="image de {{ object.name }}">
+                    </div>
+                    <div class="col-8 col-md-10">
+                        <a href="{% url 'product' object.id %}">
+                            <div class="row justify-content-between">
+                                <div class="col-4">
+                                    <h5>{{ object.name }}</h5>
+                                </div>
+                                <div class="col-2 offset-md-6">
+                                    <small>{{ object.date_pub }}</small>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-5">
+                                    <p class="card-text">{{ object.summary }}</p>
+                                </div>
+                                <div class="col-2 offset-8 offset-md-10">
+                                    <button class="btn btn-success"><a href="{% url 'product_update' object.id %}">Modifier</a></button>
+                                </div>
+                            </div>
+
+
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+
+

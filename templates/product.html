@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+<script>$(() => {
+})</script>
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {{ object.name }}{% endblock %}</title>
+</head>
+<body>
+{% block body_content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-5 col-md-6">
+                <div class="row">
+                    <input type="radio" id="image1" name="image" checked>
+                    <input type="radio" id="image2" name="image">
+                    <input type="radio" id="image3" name="image" >
+
+                    <div class="container">
+                        <div class="featured-wrapper">
+                            <ul class="featured-list">
+                                <li>
+                                    <figure>
+                                        {% if object.img1 %}
+                                            <img src="/{{ object.img1}}" alt="">
+                                        {% else %}
+                                            <img src="/{{ object.banner }}" alt="">
+
+                                        {% endif %}
+                                    </figure>
+                                </li>
+                                <li>
+                                    <figure>
+                                        {% if object.img2 %}
+                                            <img src="/{{ object.img2 }}" alt="">
+                                        {% endif %}
+                                    </figure>
+                                </li>
+                                <li>
+                                    <figure>
+                                        {% if object.img3 %}
+                                            <img src="/{{ object.img3 }}" alt="">
+                                        {% endif %}
+                                    </figure>
+                                </li>
+                            </ul>
+                            <ul class="arrows">
+                                <li>
+                                    <label for="image1"></label>
+                                </li>
+                                {% if object.img2 %}
+                                    <li>
+                                        <label for="image2"></label>
+                                    </li>
+                                {% endif %}
+                                {% if object.img3 %}
+                                    <li>
+                                        <label for="image3"></label>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            <ul class="dots">
+                                <li>
+                                    <label for="image1"></label>
+                                </li>
+                                {% if object.img2 %}
+                                    <li>
+                                        <label for="image2"></label>
+                                    </li>
+                                {% endif %}
+                                {% if object.img3 %}
+                                    <li>
+                                        <label for="image3"></label>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                  <span>
+                      <b> Auteur : </b>{{ object.users }}  <br> <b>Ecrit le : </b>{{object.date_pub }}
+                  </span>
+                    {% if object.categories %}
+                        <small><b> Catégories : </b>
+                            {% for categorie in object.categories.all %}
+                                - {{ categorie.title }}
+                            {% endfor %}
+                        </small>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-sm-7 col-md-6 mt-md-0 mt-4">
+                <h1 class="center">{{ object.name }}</h1>
+                <h3>Description : </h3>
+                <p> {{ object.content }} </p>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+</body>
+</html>
